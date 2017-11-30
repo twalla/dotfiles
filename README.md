@@ -6,7 +6,7 @@ dotfiles for macOS managed with GNU stow
 
 ### homebrew
 
-`brew.sh` automatically detects if homebrew is installed and if it isn't, installs it - afterwards it installs all applications specified in specified in `Brewfile`. One nice bonus of managing things this way is you can `brew install` additional apps and then run `brew bundle dump` to generate or update your `Brewfile`.
+`brew.sh` automatically detects if homebrew is installed and if it isn't, installs it - afterwards it installs all applications specified in `Brewfile`. One nice bonus of managing things this way is you can `brew install` additional apps and then run `brew bundle dump` to generate or update your `Brewfile`.
 
 ### stow
 
