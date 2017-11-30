@@ -4,10 +4,10 @@ tap "homebrew/core"
 brew "ack"
 brew "bash"
 brew "bash-completion@2"
-brew "coreutils"
+brew "coreutils", args: ["with-default-names"]
 brew "git"
 brew "docker"
-brew "findutils"
+brew "findutils", args: ["with-default-names"]
 brew "git-lfs"
 brew "gnu-sed", args: ["with-default-names"]
 brew "gnupg"
