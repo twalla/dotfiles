@@ -1,3 +1,7 @@
+" ===================
+" PLUGIN INSTALLATION
+" ===================
+
 " Install vim-plug if not already installed
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -16,17 +20,37 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 call plug#end()
 
+" ====================
+" PLUGIN CONFIGURATION
+" ====================
+
+" NERDTree
+let NERDTreeShowHidden=1
+
+" vim-airline
+let g:airline_powerline_fonts=1
+
+" ==================
+" COLORS AND THEMING
+" ==================
+
 " Use the Solarized Dark theme
 set background=dark
 colorscheme solarized
 let g:solarized_termtrans=1
 
-" Use Solarized them for Airline
+" Use Solarized theme for Airline
 let g:airline_theme='solarized'
 
-" Prevent formatting fuckups when pasting multi-line content
-" set paste
+" =================
+" VIM CONFIGURATION
+" =================
 
+" Prevent formatting fuckups when pasting multi-line content
+set paste
+" More natural split opening
+set splitbelow
+set splitright
 " Make Vim more useful
 set nocompatible
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
