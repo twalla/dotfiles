@@ -1,5 +1,9 @@
 # Use vim keybinds
-# set keymap vi-command
+set keymap vi-command
+set editing-mode vi
+set show-mode-in-prompt on
+set vi-cmd-mode-string ": "
+set vi-ins-mode-string "+ "
 
 # Make Tab autocomplete regardless of filename case
 set completion-ignore-case on
@@ -15,8 +19,8 @@ set mark-symlinked-directories on
 "\e[B": history-search-forward
 "\e[A": history-search-backward
 
-# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
-set match-hidden-files off
+# Autocomplete hidden files too
+set match-hidden-files on
 
 # Show all autocomplete results at once
 set page-completions off

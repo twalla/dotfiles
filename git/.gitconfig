@@ -185,3 +185,7 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
+[user]
+	signingkey = 013996007D74DA26
+	name = Taylor Walla
+	email = twalla@bypassmobile.com

@@ -134,5 +134,6 @@ alias dmenv='eval $(docker-machine env $1)'
 alias dex="docker exec -i -t"
 
 # Kubernetes stuff
+alias k='kubectl'
 alias kube='kubectl'
-alias context="kubectl config use-context"
+alias kontext="kubectl config use-context"

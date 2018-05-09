@@ -1,5 +1,14 @@
+# Set vi mode.
+set -o vi
+
 # Add GNU coreutils to the `$PATH`
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
+
+# Use python3
+export PATH=/Users/ad/bin:/usr/local/opt/python/libexec/bin:/usr/local/bin:/usr/local/sbin:$PATH
+
+# Add mkvirtualenv
+source `which virtualenvwrapper.sh`
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
