@@ -46,6 +46,8 @@ let g:airline_theme='solarized'
 " VIM CONFIGURATION
 " =================
 
+" Set line numbers
+set number
 " Prevent formatting fuckups when pasting multi-line content
 set paste
 " More natural split opening
@@ -125,11 +127,6 @@ set title
 " Show the (partial) command as it’s being typed
 set showcmd
 
-" Use relative line numbers
-if exists("&relativenumber")
-	set relativenumber
-	au BufReadPost * set relativenumber
-endif
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
 
