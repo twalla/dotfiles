@@ -18,6 +18,11 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'google/vim-jsonnet'
+Plug 'wincent/command-t'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'Alok/notational-fzf-vim'
 call plug#end()
 
 " ====================
@@ -29,6 +34,9 @@ let NERDTreeShowHidden=1
 
 " vim-airline
 let g:airline_powerline_fonts=1
+
+" notational-fzf-vim
+let g:nv_search_paths = ['~/scratch', '~/notes', '~/repos']
 
 " ==================
 " COLORS AND THEMING

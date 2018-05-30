@@ -135,5 +135,19 @@ alias dex="docker exec -i -t"
 
 # Kubernetes stuff
 alias k='kubectl'
-alias kube='kubectl'
-alias kontext="kubectl config use-context"
+alias ka='kubectl apply -f'
+alias kg='kubectl get'
+alias ke='kubectl edit'
+alias klog='kubectl logs --timestamps=true'
+alias krm='kubectl delete'
+alias krmf='kubectl delete -f'
+alias kcfg='kubectl config'
+alias ktxls='kubectl config get-contexts'
+alias ktxset='kubectl config use-context'
+alias ktxget='kubectl config current-context'
+
+# fuzzy find
+alias ff='fzf --preview="cat {}" --preview-window=right:70%:wrap'
+
+# fuzzy find and open with vim
+alias vf='vim `fzf --preview="cat {}" --preview-window=right:70%:wrap`'
