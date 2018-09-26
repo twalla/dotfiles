@@ -29,3 +29,8 @@ rm -f -r /Library/Caches/Homebrew/*
 
 # Add GNU coreutils to our path
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
+
+# Call .macos bootstrap script
+if [ "$(uname -s)" == Darwin ]; then
+  source .macos
+fi

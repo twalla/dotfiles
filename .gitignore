@@ -12,3 +12,9 @@ Thumbs.db
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
+
+# Ignore vim swaps, plugins and colors
+vim/.vim/swaps*
+vim/.vim/autoload*
+vim/.vim/plugged*
+vim/.vim/colors*

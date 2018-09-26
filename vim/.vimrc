@@ -11,13 +11,25 @@ endif
 
 " Plugins
 call plug#begin('~/.vim/plugged')
-Plug 'altercation/vim-colors-solarized'
+Plug 'w0rp/ale'
+Plug 'c9s/vikube.vim'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
+Plug 'arcticicestudio/nord-vim'
+Plug 'morhetz/gruvbox'
+Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
+Plug 'edkolev/promptline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'google/vim-jsonnet'
+Plug 'sophacles/vim-processing'
+Plug 'wincent/command-t'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'Alok/notational-fzf-vim'
 call plug#end()
 
 " ====================
@@ -30,22 +42,43 @@ let NERDTreeShowHidden=1
 " vim-airline
 let g:airline_powerline_fonts=1
 
+" notational-fzf-vim
+let g:nv_search_paths = ['~/notes', './doc', './notes']
+
 " ==================
 " COLORS AND THEMING
 " ==================
 
-" Use the Solarized Dark theme
+" Set vim theme
 set background=dark
 colorscheme solarized
 let g:solarized_termtrans=1
 
-" Use Solarized theme for Airline
+" Airline theme
 let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
+
+
+" edkolev/promptline config
+let g:promptline_theme='airline'
+let g:promptline_preset = {
+  \'a'  : [ promptline#slices#cwd() ],
+  \'b'  : [ promptline#slices#vcs_branch() ],
+  \'x'  : [ '$(prompt_k8s_context)'],
+  \'y'  : [ promptline#slices#python_virtualenv() ],
+  \'warn'  : [ promptline#slices#last_exit_code() ]}
+
+" edkolev/tmuxline config
+
+" Mirror airline theme in tmux
+let g:tmuxline_theme='airline'
 
 " =================
 " VIM CONFIGURATION
 " =================
 
+" Set line numbers
+set number
 " Prevent formatting fuckups when pasting multi-line content
 set paste
 " More natural split opening
@@ -125,11 +158,6 @@ set title
 " Show the (partial) command as it’s being typed
 set showcmd
 
-" Use relative line numbers
-if exists("&relativenumber")
-	set relativenumber
-	au BufReadPost * set relativenumber
-endif
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
 

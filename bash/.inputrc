@@ -1,9 +1,6 @@
 # Use vim keybinds
 set keymap vi-command
 set editing-mode vi
-set show-mode-in-prompt on
-set vi-cmd-mode-string ": "
-set vi-ins-mode-string "+ "
 
 # Make Tab autocomplete regardless of filename case
 set completion-ignore-case on

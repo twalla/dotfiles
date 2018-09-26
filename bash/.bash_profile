@@ -4,11 +4,14 @@ set -o vi
 # Add GNU coreutils to the `$PATH`
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
 
-# Use python3
+# use python3, source mkvirtualenv
 export PATH=/Users/ad/bin:/usr/local/opt/python/libexec/bin:/usr/local/bin:/usr/local/sbin:$PATH
-
-# Add mkvirtualenv
 source `which virtualenvwrapper.sh`
+
+# Add gopath/gobin to path
+export GOPATH=$HOME/go
+export GOBIN=$HOME/go/bin
+export PATH=$GOBIN:$PATH
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -54,4 +57,15 @@ fi;
 complete -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
-complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari SystemUIServer Terminal Chrome" killall;
+
+# go-jira tab completion
+eval "$(jira --completion-script-bash)"
+
+# kubectl aliased completion
+source <(kubectl completion bash | sed 's/kubectl/k/g')
+
+# source asdf-vm
+source $HOME/.asdf/asdf.sh
+
+source $HOME/.asdf/asdf.sh

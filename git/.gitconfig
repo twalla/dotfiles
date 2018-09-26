@@ -189,3 +189,5 @@
 	signingkey = 013996007D74DA26
 	name = Taylor Walla
 	email = twalla@bypassmobile.com
+[diff "sopsdiffer"]
+	textconv = sops -d

@@ -120,7 +120,7 @@ alias map="xargs -n1"
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
 # Lock the screen (when going AFK)
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias afk="/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine"
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec ${SHELL} -l"
@@ -135,5 +135,23 @@ alias dex="docker exec -i -t"
 
 # Kubernetes stuff
 alias k='kubectl'
-alias kube='kubectl'
-alias kontext="kubectl config use-context"
+alias ka='kubectl apply -f'
+alias kg='kubectl get'
+alias ke='kubectl edit'
+alias klog='kubectl logs -f --timestamps=true'
+alias krm='kubectl delete'
+alias krmf='kubectl delete -f'
+alias kcfg='kubectl config'
+alias ktxls='kubectl config get-contexts'
+
+# fuzzy find
+alias ff='fzf --preview="cat {}" --preview-window=right:70%:wrap'
+
+# fuzzy find and open with vim
+alias vf='vim `fzf --preview="cat {}" --preview-window=right:70%:wrap`'
+
+# use NV to take notes
+alias nv='vim +NV'
+
+# jump to root of git working directory
+alias gr='cd $(git rev-parse --show-toplevel)'

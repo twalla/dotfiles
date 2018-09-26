@@ -180,6 +180,51 @@ function tre() {
 }
 
 # show all containers in a given kubernetes pod
-function get-containers() {
+function kgco() {
   kubectl get pods $1 -o jsonpath='{.spec.containers[*].name}' | tr -s " " "\n"
+}
+
+# search for -- http://owen.cymru/sf-a-quick-way-to-search-for-some-thing-in-bash-and-edit-it-with-vim-2/
+sf() {
+  if [ "$#" -lt 1 ]; then echo "Supply string to search for!"; return 1; fi
+  printf -v search "%q" "$*"
+  include="yml,js,json,php,md,styl,pug,jade,html,config,py,cpp,c,go,hs,rb,conf,fa,lst"
+  exclude=".config,.git,node_modules,vendor,build,yarn.lock,*.sty,*.bst,*.coffee,dist"
+  rg_command='rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always" -g "*.{'$include'}" -g "!{'$exclude'}/*"'
+  files=`eval $rg_command $search | fzf --ansi --multi --reverse | awk -F ':' '{print $1":"$2":"$3}'`
+  [[ -n "$files" ]] && ${EDITOR:-vim} $files
+}
+
+# repo - search and cd repos with fzf
+function repo() {
+  local dir
+  dir=$(find ~/repos -maxdepth 2 -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+# ktx - lists kubernetes contexts, when given a valid context as an argument, switch to that context
+function ktx() {
+  if [ $# -eq 0 ]; then
+    kubectl config get-contexts;
+  else
+    kubectl config use-context "$@";
+  fi;
+}
+
+function setbg() {
+  local bg="${1}"
+  if egrep -q -i "light|dark" <(echo ${bg}); then
+    vim -c ":set background=${bg}" +Tmuxline +qall
+    vim -c ":PromptlineSnapshot! ~/.promptline.sh airline" +qall && source ~/.promptline.sh
+  fi
+}
+
+# ksh - attach a bash shell to a container
+function ksh() {
+  if [ $# -eq 1 ]; then
+    kubectl exec -it $1 -- /bin/bash;
+  elif [ $# -eq 2 ]; then
+    kubectl exec -it $1 --container $2 -- /bin/bash;
+  fi;
 }
