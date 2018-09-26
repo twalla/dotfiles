@@ -25,7 +25,6 @@ Plug 'edkolev/promptline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'google/vim-jsonnet'
-Plug 'sophacles/vim-processing'
 Plug 'wincent/command-t'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf'
@@ -43,7 +42,11 @@ let NERDTreeShowHidden=1
 let g:airline_powerline_fonts=1
 
 " notational-fzf-vim
+<<<<<<< HEAD
 let g:nv_search_paths = ['~/notes', './doc', './notes']
+=======
+let g:nv_search_paths = ['~/scratch', '~/notes', '~/repos']
+>>>>>>> bd4be78ef5887d1e2a4610af44adcb1343494af5
 
 " ==================
 " COLORS AND THEMING

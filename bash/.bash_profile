@@ -5,7 +5,13 @@ set -o vi
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
 
 # use python3, source mkvirtualenv
-export PATH=/Users/ad/bin:/usr/local/opt/python/libexec/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=$HOME/bin:/usr/local/opt/python/libexec/bin:/usr/local/bin:/usr/local/sbin:$PATH
+
+# Add gopath/gobin
+export GOPATH=$HOME/go
+export GOBIN=$HOME/go/bin
+
+# Add mkvirtualenv
 source `which virtualenvwrapper.sh`
 
 # Add gopath/gobin to path

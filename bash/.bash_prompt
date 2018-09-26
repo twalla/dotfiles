@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-# Shell prompt based on the Solarized Dark theme.
-# Screenshot: http://i.imgur.com/EkEtphC.png
-# Heavily inspired by @necolas’s prompt: https://github.com/necolas/dotfiles
-# iTerm → Profiles → Text → use 13pt Monaco with 1.1 vertical spacing.
-
 if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
   export TERM='gnome-256color';
 elif infocmp xterm-256color >/dev/null 2>&1; then
@@ -58,17 +53,6 @@ prompt_git() {
     echo -e "${1}[ ${branchName}${2}${s}]";
   else
     return;
-  fi;
-}
-
-prompt_k8s()
-{
-  CONTEXT=$(kubectl config current-context)
-  NS=$(kubectl config get-contexts $(kubectl config current-context) | tail -n +2 | awk '{print $5}')
-  if [ -n "$CONTEXT" ] && [ -n "$NS" ]; then
-      echo "[⎈ ${CONTEXT}|${NS}]"
-  elif [ -n "$CONTEXT" ]; then
-      echo "[⎈ ${CONTEXT}]"
   fi;
 }
 

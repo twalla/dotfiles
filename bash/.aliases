@@ -142,7 +142,6 @@ alias klog='kubectl logs -f --timestamps=true'
 alias krm='kubectl delete'
 alias krmf='kubectl delete -f'
 alias kcfg='kubectl config'
-alias ktxls='kubectl config get-contexts'
 
 # fuzzy find
 alias ff='fzf --preview="cat {}" --preview-window=right:70%:wrap'
