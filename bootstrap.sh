@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # Check if Homebrew is installed. If not, install it.
 if ! [ -x "$(command -v brew)" ]; then
@@ -15,13 +15,7 @@ brew update
 brew upgrade
 
 # Install everything from Brewfile
-brew bundle
-
-# Switch to using brew-installed bash as default shell
-if ! fgrep -q '/usr/local/bin/bash' /etc/shells; then
-  echo '/usr/local/bin/bash' | sudo tee -a /etc/shells;
-  chsh -s /usr/local/bin/bash;
-fi;
+brew bundle install
 
 # Cleanup
 brew cleanup --force

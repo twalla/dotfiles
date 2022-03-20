@@ -132,11 +132,6 @@
 	changed = green
 	untracked = cyan
 
-[commit]
-
-	# https://help.github.com/articles/signing-commits-using-gpg/
-	gpgsign = true
-
 [diff]
 
 	# Detect copies as well as renames
@@ -185,9 +180,3 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
-[user]
-	signingkey = 013996007D74DA26
-	name = Taylor Walla
-	email = twalla@bypassmobile.com
-[diff "sopsdiffer"]
-	textconv = sops -d

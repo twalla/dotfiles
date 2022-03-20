@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 # Shortcuts
 alias d="cd ~/Documents"
 alias dl="cd ~/Downloads"
@@ -10,7 +8,6 @@ alias g="git"
 alias ls="exa -la"
 
 # Always enable colored `grep` output
-# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -61,10 +58,6 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 # find . -name .gitattributes | map dirname
 alias map="xargs -n1"
 
-# Kill all the tabs in Chrome to free up memory
-# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
-alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
-
 # Lock the screen (when going AFK)
 alias afk="/System/Library/CoreServices/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine"
 alias lock="/System/Library/CoreServices/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine"
@@ -75,38 +68,5 @@ alias reload="exec ${SHELL} -l"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
-# Docker stuff
-alias dm="docker-machine"
-alias dmenv='eval $(docker-machine env $1)'
-alias dex="docker exec -i -t"
-
-# Kubernetes stuff
-alias k='kubectl'
-alias ka='kubectl apply -f'
-alias kg='kubectl get'
-alias ke='kubectl edit'
-alias klog='kubectl logs -f --timestamps=true'
-alias krm='kubectl delete'
-alias krmf='kubectl delete -f'
-alias kcfg='kubectl config'
-
 # fuzzy find
 alias ff='fzf --preview="cat {}" --preview-window=right:70%:wrap'
-
-# fuzzy find and open with vim
-alias vf='vim `fzf --preview="cat {}" --preview-window=right:70%:wrap`'
-
-# use NV to take notes
-alias nv='vim +NV'
-
-# jump to root of git working directory
-alias gr='cd $(git rev-parse --show-toplevel)'
-
-alias decisco='sudo ifconfig vboxnet0 down; sudo ifconfig vboxnet0 up'
-
-alias arc='duoconnect -arc -relay phab.duosec.org arc'
-
-alias lightmode="source ~/bin/set-colors-light"
-alias darkmode="source ~/bin/set-colors-dark"
-
-alias em="emacs -nw"
