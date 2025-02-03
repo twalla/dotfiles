@@ -3,7 +3,7 @@
 # Check if Homebrew is installed. If not, install it.
 if ! [ -x "$(command -v brew)" ]; then
   echo "Homebrew is not installed. Installing it now..."
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
   echo "Homebrew is already installed, proceeding..."
 fi
@@ -25,6 +25,6 @@ rm -f -r /Library/Caches/Homebrew/*
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
 
 # Call .macos bootstrap script
-if [ "$(uname -s)" == Darwin ]; then
-  source .macos
-fi
+#if [ "$(uname -s)" == Darwin ]; then
+#  source .macos
+#fi

@@ -11,10 +11,3 @@ dotfiles for macOS managed with GNU stow
 ### stow
 
 The actual config files for most applications are managed with [GNU Stow](http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html) which is installed by homebrew. Assuming you cloned the dotfiles directory into your home directory, run `stow bash`, for example, from `~/dotfiles` to create symlinks of all files within that directory to their expected locations in your home directory. It's a little weird at first but it's totally worth it.
-
-## todo
-
-- document vim/vim-plug
-- document stow, automate deplying dotfiles with stow
-- support for gruvbox and other themes
-- linux support

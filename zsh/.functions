@@ -1,0 +1,116 @@
+#!/usr/bin/env zsh
+
+# Create a new directory and enter it
+function mkd() {
+  mkdir -p "$@" && cd "$_";
+}
+
+# search for -- http://owen.cymru/sf-a-quick-way-to-search-for-some-thing-in-bash-and-edit-it-with-vim-2/
+sf() {
+  if [ "$#" -lt 1 ]; then echo "Supply string to search for!"; return 1; fi
+  printf -v search "%q" "$*"
+  include="yml,js,json,php,md,styl,pug,jade,html,config,py,cpp,c,go,hs,rb,conf,fa,lst"
+  exclude=".config,.git,node_modules,vendor,build,yarn.lock,*.sty,*.bst,*.coffee,dist"
+  rg_command='rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always" -g "*.{'$include'}" -g "!{'$exclude'}/*"'
+  files=`eval $rg_command $search | fzf --ansi --multi --reverse | awk -F ':' '{print $1":"$2":"$3}'`
+  [[ -n "$files" ]] && ${EDITOR:-vim} $files
+}
+
+# repo - search and cd repos with fzf
+function repo() {
+  local dir
+  dir=$(find ~/code -maxdepth 3 -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+# ktx - lists kubernetes contexts, when given a valid context as an argument, switch to that context
+function ktx() {
+  if [ $# -eq 0 ]; then
+    kubectl config get-contexts;
+  else
+    kubectl config use-context "$@";
+  fi;
+}
+
+function setbg() {
+  local bg="${1}"
+  if egrep -q -i "light|dark" <(echo ${bg}); then
+    vim -c ":set background=${bg}" +Tmuxline +qall
+    vim -c ":PromptlineSnapshot! ~/.promptline.sh airline" +qall && source ~/.promptline.sh
+  fi
+}
+
+# ksh - attach a bash shell to a container
+function ksh() {
+  if [ $# -eq 1 ]; then
+    kubectl exec -it $1 -- /bin/bash;
+  elif [ $# -eq 2 ]; then
+    kubectl exec -it $1 --container $2 -- /bin/bash;
+  fi;
+}
+
+function aws-login() {
+  eval $( $OWL/bin/owl aws-login $@ ); 
+};
+
+
+# Open AWS console in browser using current STS credentials from env vars
+function aws-console() {
+    # URL encode function for AWS federation URL parameters
+    urlencode_grouped_case() {
+        string=$1
+        format=
+        set --
+        
+        while
+            literal=${string%%[!-._~0-9A-Za-z]*}
+            case "$literal" in
+                ?*)
+                    format=$format%s
+                    set -- "$@" "$literal"
+                    string=${string#$literal}
+                    ;;
+            esac
+            case "$string" in
+                "") false;;
+            esac
+        do
+            tail=${string#?}
+            head=${string%$tail}
+            format=$format%%%02x
+            set -- "$@" "'$head"
+            string=$tail
+        done
+        
+        printf "$format\\n" "$@"
+    }
+
+    # Format AWS credentials as JSON
+    JSON_CREDS_FMT='{"sessionId": "%s", "sessionKey": "%s", "sessionToken": "%s"}'
+    json_creds=$(printf "$JSON_CREDS_FMT" \
+        "$AWS_ACCESS_KEY_ID" \
+        "$AWS_SECRET_ACCESS_KEY" \
+        "$AWS_SESSION_TOKEN")
+
+    # Get federation sign-in token
+    session_response=$(curl -s \
+        -G \
+        --data-urlencode "Session=${json_creds}" \
+        "https://signin.aws.amazon.com/federation?Action=getSigninToken&SessionDuration=43200")
+
+    sign_in_token=$(echo $session_response | grep -o '"SigninToken":"[^"]*' | grep -o '[^"]*$')
+
+    # Construct federation URL
+    LOGIN_URL_WITH_PLACEHOLDERS="https://signin.aws.amazon.com/federation?Action=login&Issuer=%s&Destination=%s&SigninToken=%s"
+
+    full_url=$(printf "$LOGIN_URL_WITH_PLACEHOLDERS" \
+        "$(urlencode_grouped_case 'https://twilio.com')" \
+        "$(urlencode_grouped_case 'https://console.aws.amazon.com/')" \
+        "$sign_in_token")
+
+    # Open AWS console if credentials are valid
+    [[ ! -z "$sign_in_token" ]] && \
+        chrome --new-window --incognito $full_url || \
+        printf '%s\n' "Credentials Expired!" >&2
+}

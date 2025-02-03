@@ -1,0 +1,7 @@
+# Add GNU coreutils to the `$PATH`
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
+
+# Add gopath/gobin to path
+export GOPATH=$HOME/go
+export GOBIN=$HOME/go/bin
+export PATH=$GOBIN:$PATH
